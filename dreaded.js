@@ -1,4 +1,9 @@
-/* Fortunatus Mokaya */
+/* Fortunatus Mokaya
+
+what does that mean..?
+
+
+ */
 
 
  import mokaya from "@whiskeysockets/baileys";
@@ -94,28 +99,29 @@ for (const categor of commandCategories) {
 
 
    // do not leave the prefix string empty
+const antiviewonce = process.env.ANTIVIEWONCE || 'TRUE';
 const video = await fs.readFileSync('./menu.mp4');
 const pict = await fs.readFileSync('./dreaded.jpg');
 const mode = process.env.MODE || 'PUBLIC';
-const author = process.env.STICKER_AUTHOR || 'Owl';
+const author = process.env.STICKER_AUTHOR || '𝐎𝐖𝐋';
     const prefix = process.env.PREFIX || '.';
 const mycode = process.env.COUNTRY_CODE || '254';
     const cmd = commandNam.some(name => body.includes(name)) && body.startsWith(prefix);
-const admin = process.env.ADMIN_MSG || 'Are you an admin?';
-    const group = process.env.GROUP_ONLY_MSG || 'This a not a group chat';
-    const botAdmin = process.env.BOT_ADMIN_MSG || 'Am I an admin?'
-    const NotOwner = process.env.NOT_OWNER_MSG || 'Are you the owner?';
+const admin = process.env.ADMIN_MSG || '𝐇𝐨𝐥𝐝 𝐲𝐨𝐮𝐫 𝐡𝐨𝐫𝐬𝐞𝐬 𝐚𝐧𝐝 𝐩𝐮𝐥𝐥 𝐮𝐩 𝐲𝐨𝐮𝐫 𝐬𝐨𝐜𝐤𝐬 𝐭𝐨 𝐛𝐞𝐜𝐨𝐦𝐞 𝐚𝐧 𝐚𝐝𝐦𝐢𝐧?';
+    const group = process.env.GROUP_ONLY_MSG || '𝐇𝐄𝐘 𝐭𝐡𝐢𝐬 𝐚𝐢𝐧𝐭 𝐚 𝐠𝐫𝐨𝐮𝐩';
+    const botAdmin = process.env.BOT_ADMIN_MSG || '𝐎𝐰𝐥 𝐚𝐢𝐧𝐭 𝐚𝐧 𝐚𝐝𝐦𝐢𝐧?'
+    const NotOwner = process.env.NOT_OWNER_MSG || '𝐤𝐢𝐝 𝐲𝐨𝐮 𝐚𝐫𝐞 𝐧𝐨𝐭 𝐦𝐲 𝐨𝐰𝐧𝐞𝐫?';
 const appname = process.env.APP_NAME;
 const herokuapi = process.env.HEROKU_API;
-    const packname = process.env.STICKER_PACKNAME || 'dreaded';
+    const packname = process.env.STICKER_PACKNAME || '𝐀𝐢';
 const dev = process.env.DEV || '254712703241'
  const DevDreaded = dev.split(",");
     const badwordkick = process.env.BAD_WORD_KICK || 'FALSE';
-   const bad = process.env.BAD_WORD || 'fuck';
-const botname = process.env.BOTNAME || "𝐎𝐖𝐋 𝐀𝐈 𝐕𝟐";
+   const bad = process.env.BAD_WORD || '';
+const botname = process.env.BOTNAME ||"𝐎𝐖𝐋 𝐀𝐈 𝐕𝟐";
 
-    const autorecordtypegc = process.env.RECORDING_TYPINGGC || 'TRUE';
-    const autoreaddm = process.env.AUTOREAD || 'TRUE';
+    const autorecordtypegc = process.env.RECORDING_TYPINGGC || 'FALSE';
+    const autoreaddm = process.env.AUTOREAD || 'FALSE';
 const antibot = process.env.ANTIBOT || 'FALSE';
 const antitag = process.env.ANTITAG || 'FALSE';
 const antilink = process.env.ANTILINK || 'TRUE';
@@ -188,7 +194,7 @@ const audiovn = "./alive.mp3";
         contextInfo: {
           mentionedJid: [m.sender],
           externalAdReply: {
-          title: "𝐇𝐞𝐥𝐥𝐨 𝐡𝐮𝐦𝐚𝐧 𝐚𝐦 𝐎𝐰𝐥 𝐚𝐢 𝐯𝟐 𝐜𝐫𝐞𝐚𝐭𝐞𝐝 𝐛𝐲 𝐦𝐚𝐥𝐢𝐛𝐮",
+          title: "𝐇𝐞𝐲 𝐡𝐮𝐦𝐚𝐧 𝐚𝐦 𝐎𝐖𝐋 𝐀𝐈 𝐕𝟐 𝐦𝐚𝐝𝐞 𝐛𝐲 𝐦𝐚𝐥𝐢𝐛𝐮",
           body: "𝐎𝐖𝐋 𝐀𝐈 𝐕𝟐",
           thumbnailUrl: "https://telegra.ph/file/afa18fd398c209fea95ef.jpg",
           sourceUrl: '',
@@ -433,36 +439,86 @@ return;
 }
 
 
-if (body.startsWith(prefix) && !commandNam.some(name => body.substring(prefix.length).startsWith(name))) {
+
+
+
+const trimmedBody = body.trim();
+
+if (
+    body.startsWith(prefix) &&
+    !commandNam.some(name => {
+        const userInput = trimmedBody.substring(prefix.length).toLowerCase().trim();
+
+        return userInput.includes(name.toLowerCase());
+    })
+) {
+    await sendReact("❌");
+    await m.reply(`Wrong command.or you have put space after prefix kindly check first if it's not the issue Type ${prefix}menu to see the help list,you welcomed`);
+    return;
+}
+/* const trimmedBody = body.trim();
+
+ if (body.startsWith(prefix) && !commandNam.some(name => trimmedBody.substring(prefix.length).toLowerCase().startsWith(name))) {
     await sendReact("❌");
     await m.reply(`Wrong command, Type ${prefix}menu to see the help list eh?`);
     return;
+} */
+
+
+
+// status saver
+
+try {
+
+
+const textL = m.text.toLowerCase();
+const quotedMessage = m.msg.contextInfo.quotedMessage;
+
+  if (textL.startsWith(prefix + "save") && m.quoted.chat.includes("status@broadcast")) {
+
+if (!Owner) return m.reply("This command is used by owner to save status updates");
+
+if (!m.quoted) return m.reply("Quote a status update");
+
+
+
+      if (quotedMessage.imageMessage) {
+        let imageCaption = quotedMessage.imageMessage.caption;
+        let imageUrl = await client.downloadAndSaveMediaMessage(quotedMessage.imageMessage);
+       client.sendMessage(m.chat, { image: { url: imageUrl }, caption: imageCaption });
+
+      }
+
+
+      if (quotedMessage.videoMessage) {
+        let videoCaption = quotedMessage.videoMessage.caption;
+        let videoUrl = await client.downloadAndSaveMediaMessage(quotedMessage.videoMessage);
+       client.sendMessage(m.chat, { video: { url: videoUrl }, caption: videoCaption });
+
+      }
+    } 
+
+
+
+} catch (error) {
+  console.error("Error in occured:", error);
 }
 
 
 
-/* if (body.startsWith(prefix) && !commandNam.some(name => body.substring(prefix.length).startsWith(name))) {
-    await sendReact("❌");
-    await m.reply(`Wrong command, Type ${prefix}menu to see the help list eh?`);
-    return;
-}
 
-/if (body.startsWith(prefix)) {
-    let invalidCommand = true;
-    for (let i = 0; i < commandNam.length; i++) {
-        if (body.startsWith(commandNam[i])) {
-            invalidCommand = false;
-            break;
-        }
+
+
+
+
+    if (antiviewonce === 'TRUE' && m.mtype == 'viewOnceMessageV2') {
+            if (m.isBaileys && m.fromMe) return
+        let mokaya = { ...m }
+        let msg = mokaya.message?.viewOnceMessage?.message || mokaya.message?.viewOnceMessageV2?.message
+        delete msg[Object.keys(msg)[0]].viewOnce
+        mokaya.message = msg
+        await client.sendMessage(m.chat, { forward: mokaya }, { quoted: m })
     }
-    if (invalidCommand) {
-        await sendReact("❌");
-        await m.reply(`Wrong command. Type ${prefix}menu to see the help list.`);
-        return;
-    }
-}
-*/
-
 
 
 
@@ -754,6 +810,10 @@ case "foreigners":
 commands[command](client, m, admin, isAdmin, group, botAdmin, isBotAdmin, participants, args, mycode);
 break;
 
+case "add":
+commands[command](client, m, group, botAdmin, isBotAdmin, admin, isAdmin, q, participants, groupMetadata, botname, pushname);
+break;
+
 // general commands
 
 
@@ -819,12 +879,20 @@ case "gpt":
 commands[command](client, m, text);
 break;
 
+case "ai2":
+commands[command](client, m, text, qmsg, mime, UploadFileUgu, TelegraPh);
+break;
+
 case "gpt4":
 commands[command](client, m, text, sendd, fetchJson);
 break;
 
 case "gpt":
 commands[command](client, m, text, sendd);
+break;
+
+case "imagine":
+commands[command](client, m, text);
 break;
 
 case "ai":
@@ -927,6 +995,7 @@ break;
 
 case "getvar":
 commands[command](client, m, text, Owner, NotOwner, herokuapi, appname);
+
 
 
 break;
