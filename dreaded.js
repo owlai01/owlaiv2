@@ -117,7 +117,7 @@ const herokuapi = process.env.HEROKU_API;
 const dev = process.env.DEV || '254712703241'
  const DevDreaded = dev.split(",");
     const badwordkick = process.env.BAD_WORD_KICK || 'FALSE';
-   const bad = process.env.BAD_WORD || '';
+   const bad = process.env.BAD_WORD || 'kinokii';
 const botname = process.env.BOTNAME ||"𝐎𝐖𝐋 𝐀𝐈 𝐕𝟐";
 
     const autorecordtypegc = process.env.RECORDING_TYPINGGC || 'FALSE';
